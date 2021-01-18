@@ -1,3 +1,4 @@
+//Selectores//
 const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const listaProductos = document.querySelector('#portfolio');
@@ -5,17 +6,36 @@ const vaciar = document.querySelector('#vaciar-carrito');
 
 let itemCarrito  = [];
 
+//Listeners//
 listaProductos.addEventListener('click', agregarProducto);
 vaciar.addEventListener('click', vaciarCarrito);
-contenedorCarrito.addEventListener('click', limpiarCarrito);
+carrito.addEventListener('click', eliminarProducto);
 
 document.addEventListener('DOMContentLoaded', () =>{
-    itemCarrito = JSON.parse(localStorage.getItem('carrito'));
+    itemCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    
     insertarHTML();
 })
+//Funciones//
+function vaciarCarrito() {
+	limpiarCarrito();
+	itemCarrito = [];
+	guardarStorage();
+}
 
+function eliminarProducto(e){
+    if (e.target.classList.contains('borrar-producto')) {
+        const productoID = e.target.getAttribute('data-id');
+
+        itemCarrito = itemCarrito.filter(producto => producto.id != productoID);
+        
+        insertarHTML(); //renderiza el nuevo carrito//
+        guardarStorage();
+    }
+} 
 function agregarProducto(e) {
     e.preventDefault();
+
     if(e.target.classList.contains('agregar-carrito')){
         const productoSeleccionado = e.target.parentElement.parentElement;
         datosProducto(productoSeleccionado);
@@ -31,13 +51,28 @@ function datosProducto(producto){
         cantidad: 1
     }
 
-    itemCarrito.push(productoAgregado);
+    const existe = itemCarrito.some(producto => producto.id == productoAgregado.id);
+
+	if (existe) {
+		const productos = itemCarrito.map(producto => {
+			if (producto.id === productoAgregado.id) {
+				producto.cantidad++;
+				return producto;
+			} else {
+				return producto;
+			}
+		});
+		itemCarrito = [...productos];
+	} else {
+		/* Agrego el producto al carrito */
+		itemCarrito.push(productoAgregado);
+	}
 
     insertarHTML();
     guardarStorage();
 }
 
-function guardarStorage (){
+function guardarStorage() {
     localStorage.setItem('carrito', JSON.stringify(itemCarrito));
 }
 
@@ -70,13 +105,8 @@ function insertarHTML(){
     })
 }
 
-function limpiarCarrito(){
-    while (contenedorCarrito.firstChild) { 
-		contenedorCarrito.removeChild(contenedorCarrito.firstChild);
-    }
-}  
 
-function vaciarCarrito(){
+function limpiarCarrito(){
     while (contenedorCarrito.firstChild) { 
 		contenedorCarrito.removeChild(contenedorCarrito.firstChild);
     }
