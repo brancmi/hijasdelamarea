@@ -10207,8 +10207,8 @@ ul {
   z-index: 1;
   background-color: #eeeeee;
   padding: 20px;
-  min-height: 400px;
-  min-width: 300px;
+  min-height: 560px;
+  min-width: 450px;
   border-radius: 5px;
 }
 .vacio {
@@ -10319,4 +10319,18 @@ ul {
 .icon-name {
   font-size: 32px;
   color: white;
+}
+
+.form__inline {
+  height: 35px;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 1px solid #ececec;
+  color: black;
+}
+
+.form__inline--button {
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      color: black;
 }

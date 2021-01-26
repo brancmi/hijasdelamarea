@@ -5,6 +5,7 @@ const listaProductos = document.querySelector('#portfolio');
 const vaciar = document.querySelector('#vaciar-carrito');
 
 let itemCarrito  = [];
+let stockProductos;
 
 //Listeners//
 listaProductos.addEventListener('click', agregarProducto);
@@ -15,12 +16,29 @@ document.addEventListener('DOMContentLoaded', () =>{
     itemCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
     
     insertarHTML();
+
+    $(".submenu, text").on({
+		'mouseover': function () {
+			$(".submenu #carrito").slideDown('slow');
+		},
+		'mouseleave': function () {
+			$(".submenu #carrito").slideUp('slow');
+		}
+	})
 })
+
 //Funciones//
 function vaciarCarrito() {
-	limpiarCarrito();
+    limpiarCarrito();
 	itemCarrito = [];
 	guardarStorage();
+}
+
+function limpiarCarrito(){
+    while (contenedorCarrito.firstChild) { 
+		contenedorCarrito.removeChild(contenedorCarrito.firstChild);
+    }
+    return false;
 }
 
 function eliminarProducto(e){
@@ -56,8 +74,9 @@ function datosProducto(producto){
 	if (existe) {
 		const productos = itemCarrito.map(producto => {
 			if (producto.id === productoAgregado.id) {
-				producto.cantidad++;
-				return producto;
+                producto.cantidad++;
+                console.log(productoAgregado)
+                return producto;
 			} else {
 				return producto;
 			}
@@ -65,12 +84,19 @@ function datosProducto(producto){
 		itemCarrito = [...productos];
 	} else {
 		/* Agrego el producto al carrito */
-		itemCarrito.push(productoAgregado);
-	}
-
+        itemCarrito.push(productoAgregado);
+    }
+    
     insertarHTML();
     guardarStorage();
 }
+
+//function sumaProductos(){
+    //const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
+    //const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad + precio ,0)
+    
+    //total.innerHTML = `$ ${sumaPrecios}`;
+//}
 
 function guardarStorage() {
     localStorage.setItem('carrito', JSON.stringify(itemCarrito));
@@ -102,13 +128,11 @@ function insertarHTML(){
             </td>
         `
         contenedorCarrito.appendChild(row);
-    })
-}
+    });
 
-
-function limpiarCarrito(){
-    while (contenedorCarrito.firstChild) { 
-		contenedorCarrito.removeChild(contenedorCarrito.firstChild);
-    }
-    return false;
+$("form").submit(function(event) {
+    console.log( $(this).serializeArray() );
+    event.preventDefault();
+    alert( "Ya estás inscripta en el Newsletter! Gracias!" );        
+});
 }
