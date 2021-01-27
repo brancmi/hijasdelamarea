@@ -7,10 +7,12 @@ const vaciar = document.querySelector('#vaciar-carrito');
 let itemCarrito  = [];
 let stockProductos;
 
+
 //Listeners//
 listaProductos.addEventListener('click', agregarProducto);
 vaciar.addEventListener('click', vaciarCarrito);
 carrito.addEventListener('click', eliminarProducto);
+
 
 document.addEventListener('DOMContentLoaded', () =>{
     itemCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -49,8 +51,24 @@ function eliminarProducto(e){
         
         insertarHTML(); //renderiza el nuevo carrito//
         guardarStorage();
+        calcularTotal();
     }
 } 
+
+function calcularTotal() {
+    let producto;
+    let total = 0;
+
+    producto = this.insertarHTML();
+
+    for (let i = 0; i < producto.length; i++) {
+        let element = Number(producto[i].precio * producto[i].cantidad);
+        total = total + element;
+    }
+
+    document.getElementById('total').innerHTML = "$" + total.toFixed(2);
+}
+
 function agregarProducto(e) {
     e.preventDefault();
 
@@ -75,7 +93,7 @@ function datosProducto(producto){
 		const productos = itemCarrito.map(producto => {
 			if (producto.id === productoAgregado.id) {
                 producto.cantidad++;
-                console.log(productoAgregado)
+                console.log(productoAgregado);
                 return producto;
 			} else {
 				return producto;
@@ -89,14 +107,8 @@ function datosProducto(producto){
     
     insertarHTML();
     guardarStorage();
+    calcularTotal();
 }
-
-//function sumaProductos(){
-    //const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
-    //const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad + precio ,0)
-    
-    //total.innerHTML = `$ ${sumaPrecios}`;
-//}
 
 function guardarStorage() {
     localStorage.setItem('carrito', JSON.stringify(itemCarrito));
@@ -128,6 +140,7 @@ function insertarHTML(){
             </td>
         `
         contenedorCarrito.appendChild(row);
+        
     });
 
 $("form").submit(function(event) {
