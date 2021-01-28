@@ -6,7 +6,7 @@ const vaciar = document.querySelector('#vaciar-carrito');
 
 let itemCarrito  = [];
 let stockProductos;
-
+let total = 0;
 
 //Listeners//
 listaProductos.addEventListener('click', agregarProducto);
@@ -15,9 +15,26 @@ carrito.addEventListener('click', eliminarProducto);
 
 
 document.addEventListener('DOMContentLoaded', () =>{
+
+    $.ajax({
+		url:'js/productos.json',
+        dataType: 'json',
+        success: function (data, status) {
+			stockProductos = data;
+            insertarHTML(data);
+            console.log(status);
+        },
+        error: function (xhr, status){
+            console.log(xhr)
+            console.log(status)
+        }
+    });
+
+
     itemCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
     
     insertarHTML();
+    calcularTotal();
 
     $(".submenu, text").on({
 		'mouseover': function () {
@@ -29,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 	})
 })
 
+
 //Funciones//
 function vaciarCarrito() {
     limpiarCarrito();
@@ -37,10 +55,7 @@ function vaciarCarrito() {
 }
 
 function limpiarCarrito(){
-    while (contenedorCarrito.firstChild) { 
-		contenedorCarrito.removeChild(contenedorCarrito.firstChild);
-    }
-    return false;
+    contenedorCarrito.innerHTML = "";
 }
 
 function eliminarProducto(e){
@@ -53,20 +68,6 @@ function eliminarProducto(e){
         guardarStorage();
         calcularTotal();
     }
-} 
-
-function calcularTotal() {
-    let producto;
-    let total = 0;
-
-    producto = this.insertarHTML();
-
-    for (let i = 0; i < producto.length; i++) {
-        let element = Number(producto[i].precio * producto[i].cantidad);
-        total = total + element;
-    }
-
-    document.getElementById('total').innerHTML = "$" + total.toFixed(2);
 }
 
 function agregarProducto(e) {
@@ -77,6 +78,17 @@ function agregarProducto(e) {
         datosProducto(productoSeleccionado);
     }
 }
+
+function calcularTotal() {
+    producto = this.insertarHTML();
+
+    for (let i = 0; i < producto; i++) {
+        let element = Number(producto[i].precio * producto[i].cantidad);
+        total = total + element;
+    }
+
+    document.querySelector('#total').innerHTML = "$" + total.toFixed(2);
+} 
 
 function datosProducto(producto){
     const productoAgregado = {
@@ -95,8 +107,6 @@ function datosProducto(producto){
                 producto.cantidad++;
                 console.log(productoAgregado);
                 return producto;
-			} else {
-				return producto;
 			}
 		});
 		itemCarrito = [...productos];
@@ -107,7 +117,6 @@ function datosProducto(producto){
     
     insertarHTML();
     guardarStorage();
-    calcularTotal();
 }
 
 function guardarStorage() {
@@ -141,7 +150,7 @@ function insertarHTML(){
         `
         contenedorCarrito.appendChild(row);
         
-    });
+    });  
 
 $("form").submit(function(event) {
     console.log( $(this).serializeArray() );

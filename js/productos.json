@@ -1,38 +1,38 @@
 [
     {
-       "imagen":"assets/img/aqua.jpg",
-       "nombre":"Sahumo",
-       "precio":"$15000",
+       "imagen":"assets/img/sahumos.jpg",
+       "nombre":"Sahumos de hierbas y flores",
+       "precio":"$310",
        "id":1
     },
     {
-       "imagen":"assets/img/aqua.jpg",
-       "nombre":"Vela en cuenco de ceramica",
-       "precio":"$18000",
+       "imagen":"assets/img/sahumador.jpeg",
+       "nombre":"Sahumador de cerámica",
+       "precio":"$720",
        "id":2
     },
     {
-       "imagen":"assets/img/aqua.jpg",
-       "nombre":"Kit sahumado",
-       "precio":"$12000",
+       "imagen": "assets/img/velacuenco.jpeg",
+       "nombre":"Vela en cuenco de cerámica",
+       "precio":"$950",
        "id":3
     },
     {
-       "imagen":"assets/img/aqua.jpg",
-       "nombre":"Sales de baño",
-       "precio":"$15000",
+       "imagen":"assets/img/sahumerios.jpeg",
+       "nombre":"Sahumerios naturales",
+       "precio":"$180",
        "id":4
     },
     {
-       "imagen":"assets/img/aqua.jpg",
-       "nombre":"Agua Florida",
-       "precio":"$15000",
+       "imagen":"assets/img/sales.jpeg",
+       "nombre":"Sales de baño",
+       "precio":"$700",
        "id":5
     },
     {
-       "imagen":"assets/img/aqua.jpg",
-       "nombre":"Hierbas Organicas",
-       "precio":"$5000",
+       "imagen":"assets/img/blend.jpg",
+       "nombre":"Blend Floral",
+       "precio":"$580",
        "id":6
     },
     {
