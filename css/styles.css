@@ -159,12 +159,12 @@ sup {
 }
 
 a {
-  color: #F2C335;
+  color: #565939;
   text-decoration: none;
   background-color: transparent;
 }
 a:hover {
-  color: #3E5902;
+  color: #565939;
   text-decoration: underline;
 }
 
@@ -472,7 +472,7 @@ mark,
 }
 
 .img-fluid {
-  width: 300px;
+  width: 250px;
   max-width: 100%;
   height: auto;
 }
@@ -579,8 +579,8 @@ pre code {
 }
 
 .no-gutters {
-  margin-right: 0;
-  margin-left: 0;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .col-xl,
@@ -10194,7 +10194,7 @@ ul {
 }
 
 .submenu {
-  position: relative;
+  position: fixed;
 }
 
 .submenu #carrito{
@@ -10202,17 +10202,19 @@ ul {
 }
 .submenu:hover #carrito{
   display: block;
-  position: absolute;
+  position: fixed;
   right:0;
 
-  top:100%;
+  top: 0;
   z-index: 1;
   background-color: #eeeeee;
   padding: 20px;
-  min-height: 560px;
-  min-width: 450px;
-  border-radius: 5px;
+  height: 100%;
+  max-width: 450px;
+  overflow-x: hidden;
+  padding-top: 60px;
 }
+
 .vacio {
   padding: 10px;
   background-color: crimson;
@@ -10220,33 +10222,6 @@ ul {
   border-radius: 10px;
   color: white;
 }
-.contenido-hero {
-  margin-top: 80px;
-  color: white;
-}
-.contenido-hero form {
-  position: relative;
-  margin-bottom: 0;
-}
-.contenido-hero form #buscador {
-  height: 50px;
-  margin-bottom: 0;
-}
-.contenido-hero form .submit-buscador {
-  position: absolute;
-  right:0;
-  top:0;
-  height: 100%;
-  padding: 0;
-  display: block;
-  text-indent: -9999px;
-  width: 50px;
-  background-image: url(../img/lupa.png);
-  background-position: right center;
-  background-repeat: no-repeat;
-  border:none;
-}
-
 
 .barra {
   padding: 20px 0;
@@ -10341,4 +10316,9 @@ ul {
 
 .ic-size{
   font-size: 1.5rem;
+}
+
+.portfolio-box-caption{
+  display: inline-block; 
+  margin: 20px;
 }

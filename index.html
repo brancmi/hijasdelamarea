@@ -36,19 +36,20 @@
                             <li class="submenu text">
                                 <img src="assets/img/cart.png" id="img-carrito">
                                 <div id="carrito">
-    
                                     <table id="lista-carrito" class="u-full-width">
                                         <thead>
                                             <tr>
-                                                <th>Imagen</th>
-                                                <th>Nombre</th>
+                                                <h4>Carrito de Compras</h4>
+                                                <hr>
+                                                <th></th>
+                                                <th>Producto</th>
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
-                                    <p class="text-right"><span id="total">Total:</span></p>
+                                    <p class="text-right"><span id="total"></span></p>
                                     <div><button class="btn-carrito" href="#" id="vaciar-carrito" data-id="">Vaciar Carrito</button></div>
                                     <div><button class="btn-carrito" href="#" id="" data-id="">Finalizar compra</button></div>
                                 </div>
@@ -95,66 +96,8 @@
         <!-- Portfolio-->
         <div id="portfolio">
             <div class="container-fluid p-0">
-                <div class="row no-gutters">
-                    <div class="card col-lg-4 col-sm-6">
-                            <div class="portfolio-box-caption">
-                                <img class="img-fluid" src="assets/img/sahumos.jpg"/>
-                                <div class="project-category text-white-50"><h4>Sahumos de hierbas y flores</h4></div>
-                                <p><span class="u-pull-right ">$310</span></p>
-                                <div><button href="#" class="btn success u-full-width input agregar-carrito" data-id="1">Agregar al carrito</button></div>
-                                <div class="project-name"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card col-lg-4 col-sm-6">
-                            <div class="portfolio-box-caption">
-                                <img class="img-fluid" src="assets/img/sahumador.jpeg"/>
-                                <div class="project-category text-white-50"><h4>Sahumador de cerámica</h4></div>
-                                <p><span class="u-pull-right ">$720</span></p>
-                                <div><button href="#" class="btn success u-full-width input agregar-carrito" data-id="2">Agregar al carrito</button></div>
-                                <div class="project-name"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card col-lg-4 col-sm-6">
-                            <div class="portfolio-box-caption">
-                                <img class="img-fluid" src="assets/img/velacuenco.jpeg"/>
-                                <div class="project-category text-white-50"><h4>Vela en cuenco de cerámica</h4></div>
-                                <p><span class="u-pull-right">$950</span></p>
-                                <div><button href="#" class="btn success u-full-width input agregar-carrito" data-id="3">Agregar al carrito</button></div>
-                                <div class="project-name"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card col-lg-4 col-sm-6">
-                            <div class="portfolio-box-caption">
-                                <img class="img-fluid" src="assets/img/sahumerios.jpeg"/>
-                                <div class="project-category text-white-50"><h4>Sahumerios naturales</h4></div>
-                                <p><span class="u-pull-right">$180</span></p>
-                                <div><button href="#" class="btn success u-full-width input agregar-carrito" data-id="4">Agregar al carrito</button></div>
-                                <div class="project-name"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card col-lg-4 col-sm-6">
-                            <div class="portfolio-box-caption">
-                                <img class="img-fluid" src="assets/img/sales.jpeg"/>
-                                <div class="project-category text-white-50"><h4>Sales de baño</h4></div>
-                                <p><span class="u-pull-right ">$700</span></p>
-                                <div><button href="#" class="btn success u-full-width input agregar-carrito" data-id="5">Agregar al carrito</button></div>
-                                <div class="project-name"></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card col-lg-4 col-sm-6">
-                            <div class="portfolio-box-caption">
-                                <img class="img-fluid" src="assets/img/blend.jpg" alt="" />
-                                <div class="project-category text-white-50"><h4>Blend Floral</h4></div>
-                                <p><span class="u-pull-right ">$580</span></p>
-                                <div><button href="#" class="btn success u-full-width input agregar-carrito" data-id="6">Agregar al carrito</button></div>
-                                <div class="project-name"></div>
-                            </div>
-                        </a>
+                <div class="card no-gutters">
+                    <div id="portcard">
                     </div>
                 </div>
             </div>
@@ -225,6 +168,6 @@
         <script src="js/jquery.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/script.js"></script>
-        <script src="js/productos.js"></script>
+        <!--<script src="js/productos.js"></script>-->
     </body>
 </html>

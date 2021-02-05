@@ -1,4 +1,4 @@
-const stockProductosAll = [
+const stockProductos = [
 	{
 		"imagen":"assets/img/sahumos.jpg",
 		"nombre":"Sahumos de hierbas y flores",
