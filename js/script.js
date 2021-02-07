@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     itemCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
     insertarHTML();
-    actualizarCarritoTotal();
+
 
     $(".submenu, text").on({
 		'mouseover': function () {
@@ -94,7 +94,7 @@ function eliminarProducto(e){
 function agregarProducto(event, id) {
     if(!itemCarrito.some(producto => producto.id == id)){
         const producto = stockProductos.find(producto => producto.id == id);
-        producto.cantidad = 1;
+        producto.cantidad = 1
         itemCarrito.push(producto);
         insertarHTML();
         guardarStorage();
