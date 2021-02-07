@@ -3,16 +3,15 @@ const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const listaProductos = document.querySelector('#portfolio');
 const vaciar = document.querySelector('#vaciar-carrito');
+const totalCarrito = document.getElementById('total');
 
 let itemCarrito  = [];
 let stockProductos;
-
 
 //Listeners//
 listaProductos.addEventListener('click', agregarProducto);
 vaciar.addEventListener('click', vaciarCarrito);
 carrito.addEventListener('click', eliminarProducto);
-
 
 document.addEventListener('DOMContentLoaded', () =>{
 
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () =>{
         success: function (data, status, xhr) {
             stockProductos = data;
             cargarListaProductos(data);
-            console.log(status);
         },
         error: function (xhr, status){
             console.log(xhr)
@@ -42,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () =>{
     }) */
 
     itemCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    insertarHTML();
     actualizarCarritoTotal();
 
     $(".submenu, text").on({
@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 //Funciones//
 function cargarListaProductos(productos) {
+    $('#portfolio');
     productos.forEach((producto) =>{
     
     const {imagen, nombre, precio, id} = producto;
@@ -79,36 +80,34 @@ function vaciarCarrito() {
     guardarStorage();
 }
 
-function limpiarCarrito(){
-    contenedorCarrito.innerHTML = "";
-}
-
 function eliminarProducto(e){
     if (e.target.classList.contains('borrar-producto')) {
         const productoID = e.target.getAttribute('data-id');
 
         itemCarrito = itemCarrito.filter(producto => producto.id != productoID);
         
-        insertarHTML(); //renderiza el nuevo carrito//
+        insertarHTML(); //renderiza el nuevo carrito
+        guardarStorage(); //actualiza storage
+    }
+}
+
+function agregarProducto(event, id) {
+    if(!itemCarrito.some(producto => producto.id == id)){
+        const producto = stockProductos.find(producto => producto.id == id);
+        producto.cantidad = 1;
+        itemCarrito.push(producto);
+        insertarHTML();
         guardarStorage();
     }
 }
 
-function agregarProducto(e) {
-    e.preventDefault();
-
-    if(e.target.classList.contains('agregar-carrito')){
-        const productoSeleccionado = e.target.parentElement.parentElement;
-        datosProducto(productoSeleccionado);
-    }
-}
-
 function datosProducto(producto){
+    //extraer info del producto
     const productoAgregado = {
         imagen: producto.querySelector('img').src,
         nombre: producto.querySelector('h5').textContent,
         precio: producto.querySelector('p span').textContent,
-        id: producto.querySelector('button').getAttribute('data-id'),
+        id: producto.querySelector('agregar-carrito').getAttribute('data-id'),
         cantidad: 1
     }
 
@@ -120,7 +119,9 @@ function datosProducto(producto){
                 producto.cantidad++;
                 console.log(productoAgregado);
                 return producto;
-			}
+			} else{
+                return producto;
+            }
 		});
 		itemCarrito = [...productos];
 	} else {
@@ -138,52 +139,49 @@ function guardarStorage() {
 function insertarHTML(){
 
     limpiarCarrito();
+    let sumaPrecios = 0;
     
     itemCarrito.forEach(producto  =>{
-
         const {imagen, nombre, precio, cantidad, id} = producto;
 
         const row = document.createElement('tr');
         row.innerHTML = `
+            <td><img src="${imagen}" class="agregado-carrito"></td>
+            <td><h5>${nombre}</h5></td>
+            <td><h5>${precio}</h5></td>
             <td>
-                <img src="${imagen}" class="agregado-carrito">
+            <button class="btn-cantidad default disminuir" onClick="disminuirCantidad('${id}')">-</button><input type="text" class="cantidad-carrito" value="${cantidad}"><button class="btn-cantidad default aumentar" onClick="aumentarCantidad('${id}')">+</button>
             </td>
-            <td>
-                ${nombre}
-            </td>
-            <td>
-                ${precio}
-            </td>
-            <td>
-                ${cantidad}
-            </td>
-            <td>
-                <a href="#" class="borrar-producto" data-id="${id}"> X </a>
-            </td>
+            <td><a href="#" class="borrar-producto" data-id="${id}">x</a></td>
         `
         contenedorCarrito.appendChild(row);
-
-    });
-    actualizarCarritoTotal();
+        sumaPrecios += (precio * cantidad);
+    }); 
+    totalCarrito.innerHTML = `$${sumaPrecios}`;
 }
 
-function actualizarCarritoTotal(){
-    total = 0;
-    const carritoTotal = document.querySelector('#total');
-    carritoTotal.textContent = `$${total}`;
-
-    if(itemCarrito != []){
-        itemCarrito.forEach((producto) => {
-            const {imagen, nombre, precio, cantidad, id} = producto;
-            const precioParse = Number(precio.replace("$", ""));
-            total = total + cantidad * precioParse;
-
-            carritoTotal.textContent = `$${total}`;
-    });
-    }else{
-        total = 0;
-    }
+function limpiarCarrito() {
+    contenedorCarrito.innerHTML = '';
 }
+
+function aumentarCantidad(id){
+    itemCarrito.map(producto => {
+        if(producto.id == id) 
+        producto.cantidad++;
+    });
+    insertarHTML();
+    guardarStorage();
+}
+
+function disminuirCantidad(id){
+    itemCarrito.map(producto => {
+        if(producto.id == id && producto.cantidad > 1) 
+        producto.cantidad--;
+    });
+    insertarHTML();
+    guardarStorage();
+}
+
 
 $("form").submit(function(event) {
     console.log( $(this).serializeArray() );
