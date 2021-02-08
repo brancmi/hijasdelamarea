@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () =>{
         }
     });
 
+    itemCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    insertarHTML();
+
     /*Cargar productos Fetch
     document.addEventListener("DOMContentLoaded", () =>{
         fetch("/js/productos.json")
@@ -38,11 +41,6 @@ document.addEventListener('DOMContentLoaded', () =>{
 
         }
     }) */
-
-    itemCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    insertarHTML();
-
 
     $(".submenu, text").on({
 		'mouseover': function () {
@@ -56,28 +54,28 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 
 //Funciones//
-function cargarListaProductos(productos) {
-    $('#portfolio');
-    productos.forEach((producto) =>{
-    
-    const {imagen, nombre, precio, id} = producto;
-
-    const divCard = document.createElement('div');
-    divCard.classList.add('portfolio-box-caption');
-    divCard.innerHTML = `
-            <img class="img-fluid" src="${imagen}"/>
-            <div class="project-category text-white-50"><h5>${nombre}</h5></div>
-            <p><span class="u-pull-right ">${precio}</span></p>
-            <div><button href="#" class="btn success u-full-width input agregar-carrito" data-id="${id}">Agregar al carrito</button></div>
-    `
-    document.querySelector('#portcard').appendChild(divCard);
-    });
-}
-
 function vaciarCarrito() {
     limpiarCarrito();
 	itemCarrito = [];
     guardarStorage();
+}
+
+function cargarListaProductos(productos) {
+    $('#portfolio');
+    productos.forEach((producto) =>{
+    
+    const {imagen, descripcion, nombre, precio, id} = producto;
+
+    const divCard = document.createElement('div');
+    divCard.classList.add('portfolio-box-caption');
+    divCard.innerHTML = `
+        <img class="img-fluid" src="${imagen}">
+        <div class="project-category text-white-50"><h5>${nombre}</h5></div>
+        <p><span class="u-pull-right ">${precio}</span></p>
+        <div><button href="#" class="btn success u-full-width input agregar-carrito" data-id="${id}">Agregar al carrito</button></div>
+    `
+    document.querySelector('#portcard').appendChild(divCard);
+    });
 }
 
 function eliminarProducto(e){
@@ -94,7 +92,6 @@ function eliminarProducto(e){
 function agregarProducto(event, id) {
     if(!itemCarrito.some(producto => producto.id == id)){
         const producto = stockProductos.find(producto => producto.id == id);
-        producto.cantidad = 1
         itemCarrito.push(producto);
         insertarHTML();
         guardarStorage();
