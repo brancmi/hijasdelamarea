@@ -1,50 +1,48 @@
-const stockProductos = [
-	{
-		"imagen":"assets/img/sahumos.jpg",
-		"nombre":"Sahumos de hierbas y flores",
-		"precio":"$310",
-		"id":1
-	 },
-	 {
-		"imagen":"assets/img/sahumador.jpeg",
-		"nombre":"Sahumador de cerámica",
-		"precio":"$720",
-		"id":2
-	 },
-	 {
-		"imagen": "assets/img/velacuenco.jpeg",
-		"nombre":"Vela en cuenco de cerámica",
-		"precio":"$950",
-		"id":3
-	 },
-	 {
-		"imagen":"assets/img/sahumerios.jpeg",
-		"nombre":"Sahumerios naturales",
-		"precio":"$180",
-		"id":4
-	 },
-	 {
-		"imagen":"assets/img/sales.jpeg",
-		"nombre":"Sales de baño",
-		"precio":"$700",
-		"id":5
-	 },
-	 {
-		"imagen":"assets/img/blend.jpg",
-		"nombre":"Blend Floral",
-		"precio":"$580",
-		"id":6
-	 },
-	 {
-		 "imagen":"assets/img/aqua.jpg",
-		 "nombre":"Flores Organicas",
-		 "precio":"$16000",
-		 "id":7
-	  },
-	  {
-		 "imagen":"assets/img/aqua.jpg",
-		 "nombre":"Sahumerios naturales",
-		 "precio":"$12000",
-		 "id":8
-	  }
-]
+let stockProductos;
+
+document.addEventListener('DOMContentLoaded', () => {
+    $.ajax({
+        type: "GET",
+		url:'js/productos.json',
+        dataType: 'json',
+        success: function (data) {
+            stockProductos = data;
+            cargarListaProductos(stockProductos);
+        },
+        error: function (){
+            console.log("Error");
+        }
+    });
+});
+
+function cargarListaProductos(productos) {
+    productos.forEach((producto) =>{
+    
+    const {imagen, nombre, precio, id} = producto;
+		
+    const divCard = document.createElement('div');
+    divCard.classList.add('portfolio-box-caption');
+    divCard.innerHTML += `
+        <img class="img-fluid" src="${imagen}">
+        <div class="project-category text-white-50"><h5>${nombre}</h5></div>
+        <p><span class="u-pull-right ">${precio}</span></p>
+        <div><button onClick="botonAgregar" id="btnbtn" class="btn success u-full-width input agregar-carrito" data-id="${id}">Agregar al carrito</button></div>
+    `
+    document.querySelector('#portcard').appendChild(divCard);
+    });
+}
+
+
+
+
+
+/*Cargar productos Fetch
+    document.addEventListener("DOMContentLoaded", () =>{
+        fetch("/js/productos.json")
+        .then(ans) => ans.json()}
+        .then(productos) => {
+            stockProductos = productos;
+            cargarListaProductos(productos);
+
+        }
+    }) */

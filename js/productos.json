@@ -4,6 +4,7 @@
        "descripcion": "Ramilletes de hierbas y flores para sahumar. Hechos con Romero, Eucalipto, Lavanda y Manzanilla.",
        "nombre":"Sahumos de hierbas y flores",
        "precio":"$350",
+       "cantidad": 1,
        "id": 1
     },
     {
@@ -11,6 +12,7 @@
        "descripcion": "Sahumador de cerámica pintado a mano",
        "nombre":"Sahumador de cerámica",
        "precio":"$720",
+       "cantidad": 1,
        "id": 2
     },
     {
@@ -18,6 +20,7 @@
        "descripcion": "Vela de cera de soja en cuenco de cerámica. Contiene: Artemisa, Lavanda, Mirra y cristal Amatista. Aroma: Lavanda.",
        "nombre":"Vela en cuenco de cerámica",
        "precio":"$950",
+       "cantidad": 1,
        "id": 3
     },
     {
@@ -25,6 +28,7 @@
        "descripcion": "Sahumerios naturales hechos con la resina de Copal.",
        "nombre":"Sahumerios naturales",
        "precio":"$180",
+       "cantidad": 1,
        "id": 4
     },
     {
@@ -32,6 +36,7 @@
        "descripcion": "La botella trae 200g y contiene: Sal del Himalaya, Sal Marina, Lavanda y Pétalos de rosas.",
        "nombre":"Sales de baño",
        "precio":"$700",
+       "cantidad": 1,
        "id": 5
     },
     {
@@ -39,6 +44,23 @@
        "descripcion": "Blend de flores orgánicas para consumo, vapores faciales y demás usos esteticos. Contiene: Lavanda, Caléndula, Pétalos de rosas y Jazmín.",
        "nombre":"Blend Floral",
        "precio":"$580",
+       "cantidad": 1,
        "id": 6
-    }
+    },
+    {
+      "imagen":"assets/img/amatista.jpg",
+      "descripcion": "Cristal Amatista Bahia de aproximadamente 8cm.",
+      "nombre":"Amatista Bahia",
+      "precio":"$830",
+      "cantidad": 1,
+      "id": 7
+   },
+   {
+      "imagen":"assets/img/aguaf.jpeg",
+      "descripcion": "Agua florida 100ml",
+      "nombre":"Agua Florida",
+      "precio":"$440",
+      "cantidad": 1,
+      "id": 8
+   }
 ]
