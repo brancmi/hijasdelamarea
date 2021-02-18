@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         success: function (data) {
             stockProductos = data;
             cargarListaProductos(stockProductos);
+            botonAgregar();
         },
         error: function (){
             console.log("Error");
@@ -22,19 +23,15 @@ function cargarListaProductos(productos) {
 		
     const divCard = document.createElement('div');
     divCard.classList.add('portfolio-box-caption');
-    divCard.innerHTML += `
+    divCard.innerHTML = `
         <img class="img-fluid" src="${imagen}">
         <div class="project-category text-white-50"><h5>${nombre}</h5></div>
         <p><span class="u-pull-right ">${precio}</span></p>
-        <div><button onClick="botonAgregar" id="btnbtn" class="btn success u-full-width input agregar-carrito" data-id="${id}">Agregar al carrito</button></div>
+        <div><button class="btn success u-full-width input agregar-carrito boton__agregar" data-id="${id}">Agregar al carrito</button></div>
     `
     document.querySelector('#portcard').appendChild(divCard);
     });
 }
-
-
-
-
 
 /*Cargar productos Fetch
     document.addEventListener("DOMContentLoaded", () =>{
