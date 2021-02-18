@@ -137,6 +137,7 @@ function disminuirCantidad(id){
 
 function limpiarCarrito() {
     contenedorCarrito.innerHTML = '';
+    totalCarrito.innerHTML = '';
 }
 
 $("form").submit(function(event) {
